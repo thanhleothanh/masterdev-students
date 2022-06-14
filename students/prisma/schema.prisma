@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Hocsinh {
+  @@map(name: "hocsinh")
+  id      Int       @id @default(autoincrement())
+  mahocsinh String  @db.VarChar(11) @unique 
+  hovaten String    @db.VarChar(100)
+  gioitinh String   @db.VarChar(3)
+  lop     String    @db.VarChar(10)
+  dantoc String   @db.VarChar(20)
+  hokhauthuongtru String   @db.VarChar(500)
+  dienthoailienhe String   @db.VarChar(11)
+  ghichu String?   @db.VarChar(1000)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  //relation
+  thanhpho Thanhpho @relation(fields: [noisinh], references: [id])
+  noisinh Int
+
+  quanhuyen QuanHuyen @relation(fields: [quanhuyenId], references: [id])
+  quanhuyenId Int
+
+  truong Truong @relation(fields: [truongId], references: [id])
+  truongId Int
+
+  diemsotuyen Diemsotuyen?
+  ngaysinh Ngaysinh?
+
+}
+
+model Thanhpho {
+  @@map(name: "thanhpho")
+  id      Int       @id @default(autoincrement())
+  tenthanhpho String  @db.VarChar(100) 
+
+  //relation
+  hocsinh Hocsinh[]
+  quanhuyen QuanHuyen[]
+}
+
+model QuanHuyen {
+  @@map(name: "quanhuyen")
+  id      Int       @id @default(autoincrement())
+  tenquanhuyen String  @db.VarChar(100) 
+  
+  //relation
+  thanhpho Thanhpho @relation(fields: [thanhphoId], references: [id])
+  thanhphoId Int
+
+  hocsinh Hocsinh[]
+}
+
+model Truong {
+  @@map(name: "truong")
+  id      Int       @id @default(autoincrement())
+  tentruong String  @db.VarChar(100) 
+
+  //relation
+  hocsinh Hocsinh[]
+}
+
+model Diemsotuyen {
+  @@map(name: "diemsotuyen")
+  hocsinh Hocsinh @relation(fields: [hocsinhId], references: [id], onDelete: Cascade)
+  hocsinhId Int
+  @@id([hocsinhId])
+
+  tongdiemlop1 Int 
+  tongdiemlop2 Int 
+  tongdiemlop3 Int 
+  tongdiemlop4 Int 
+  tongdiemlop5 Int 
+  tongdiem5nam Int 
+  diemuutien Int? 
+  tongdiemsotuyen Int 
+}
+
+model Ngaysinh {
+  @@map(name: "ngaysinh")
+  hocsinh Hocsinh @relation(fields: [hocsinhId], references: [id], onDelete: Cascade)
+  hocsinhId Int
+  @@id([hocsinhId])
+
+  ngay Int 
+  thang Int 
+  nam Int 
+}

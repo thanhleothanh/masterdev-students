@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import HocsinhTable from '../components/HocsinhTable';
-import Loader from '../components/Loader';
 import Message from '../components/Message';
 import axios from 'axios';
 
 const HomeScreen = () => {
   const [newFile, setNewFile] = useState();
-  const [searchString, setSearchByHovaten] = useState(null);
+  const [searchString, setSearchString] = useState(null);
   const [isSuccessUpload, setIsSuccessUpload] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [errorUpload, setErrorUpload] = useState(false);
@@ -74,7 +73,7 @@ const HomeScreen = () => {
           type='text'
           className='w-full px-4 py-3 appearance-none rounded-xl focus:ring-4 focus:ring-opacity-75 focus:ring-yellow-600 focus:outline-none'
           placeholder='Tìm kiếm theo tên hoặc mã học sinh'
-          onChange={(e) => setSearchByHovaten(e.target.value)}
+          onChange={(e) => setSearchString(e.target.value)}
           id='timkiem'
           name='timkiem'
         ></input>

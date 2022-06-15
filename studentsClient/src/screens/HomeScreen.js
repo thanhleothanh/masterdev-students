@@ -6,8 +6,9 @@ import axios from 'axios';
 
 const HomeScreen = () => {
   const [newFile, setNewFile] = useState();
-  const [isUploading, setIsUploading] = useState(false);
+  const [searchString, setSearchByHovaten] = useState(null);
   const [isSuccessUpload, setIsSuccessUpload] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [errorUpload, setErrorUpload] = useState(false);
 
   const changeHandler = (event) => {
@@ -60,9 +61,7 @@ const HomeScreen = () => {
         </div>
         <div className='w-full'>
           {!isSuccessUpload && !errorUpload ? (
-            <Message type='info'>
-              Chỉ chọn file excel, speadsheetml có dạng đuôi .xlsx!
-            </Message>
+            <Message type='info'>Chỉ chọn file excel, speadsheetml!</Message>
           ) : isSuccessUpload ? (
             <Message>Tải file lên thành công!</Message>
           ) : (
@@ -70,8 +69,21 @@ const HomeScreen = () => {
           )}
         </div>
       </div>
+      <div className='flex flex-col w-full mt-10'>
+        <input
+          type='text'
+          className='w-full px-4 py-3 appearance-none rounded-xl focus:ring-4 focus:ring-opacity-75 focus:ring-yellow-600 focus:outline-none'
+          placeholder='Tìm kiếm theo tên hoặc mã học sinh'
+          onChange={(e) => setSearchByHovaten(e.target.value)}
+          id='timkiem'
+          name='timkiem'
+        ></input>
+      </div>
       <div className='w-full'>
-        <HocsinhTable isSuccessUpload={isSuccessUpload} />
+        <HocsinhTable
+          searchString={searchString}
+          isSuccessUpload={isSuccessUpload}
+        />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const getAllHocsinh = async () => {
   return data;
 };
 
-const HocsinhTable = ({ isSuccessUpload }) => {
+const HocsinhTable = ({ searchString, isSuccessUpload }) => {
   const [allHocsinh, setAllHocsinh] = useState(null);
   const [firstFetch, setFirstFetch] = useState(false);
 
@@ -100,66 +100,81 @@ const HocsinhTable = ({ isSuccessUpload }) => {
           {allHocsinh &&
             allHocsinh.length != 0 &&
             allHocsinh.map((hocsinh, i) => {
-              return (
-                <tr key={hocsinh.id}>
-                  <td className='py-2 border-4 tableCell'>{i + 1}</td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.truong.tentruong}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.quanhuyen.tenquanhuyen}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.mahocsinh}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>{hocsinh.lop}</td>
-                  <td className='py-2 border-4 tableCell'>{hocsinh.hovaten}</td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.ngaysinh.ngay}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.ngaysinh.thang}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.ngaysinh.nam}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.gioitinh}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>{hocsinh.dantoc}</td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.hokhauthuongtru}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.dienthoailienhe}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiemlop1}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiemlop2}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiemlop3}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiemlop4}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiemlop5}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiem5nam}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.diemuutien || 0}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>
-                    {hocsinh.diemsotuyen.tongdiemsotuyen}
-                  </td>
-                  <td className='py-2 border-4 tableCell'>{hocsinh.ghichu}</td>
-                </tr>
-              );
+              if (
+                searchString == null ||
+                hocsinh.mahocsinh
+                  .toLowerCase()
+                  .includes(searchString.toLowerCase()) ||
+                hocsinh.hovaten
+                  .toLowerCase()
+                  .includes(searchString.toLowerCase())
+              )
+                return (
+                  <tr key={hocsinh.id}>
+                    <td className='py-2 border-4 tableCell'>{i + 1}</td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.truong.tentruong}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.quanhuyen.tenquanhuyen}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.mahocsinh}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>{hocsinh.lop}</td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.hovaten}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.ngaysinh.ngay}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.ngaysinh.thang}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.ngaysinh.nam}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.gioitinh}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.dantoc}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.hokhauthuongtru}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.dienthoailienhe}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiemlop1}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiemlop2}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiemlop3}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiemlop4}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiemlop5}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiem5nam}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.diemuutien || 0}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.diemsotuyen.tongdiemsotuyen}
+                    </td>
+                    <td className='py-2 border-4 tableCell'>
+                      {hocsinh.ghichu}
+                    </td>
+                  </tr>
+                );
             })}
           {!allHocsinh ||
             (allHocsinh.length == 0 && (

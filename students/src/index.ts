@@ -2,6 +2,8 @@ import app from './app';
 
 const start = async () => {
   try {
+    //connect to db
+    //prisma already handled
   } catch (err) {
     console.error(err);
   }

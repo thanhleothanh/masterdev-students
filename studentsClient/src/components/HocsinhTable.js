@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Message from './Message';
 
 const getAllHocsinh = async () => {
   const { data } = await axios.get('/api/v1/hocsinh');
@@ -97,7 +96,7 @@ const HocsinhTable = ({ searchString, isSuccessUpload }) => {
         </thead>
 
         <tbody>
-          {allHocsinh &&
+          {allHocsinh != null &&
             allHocsinh.length != 0 &&
             allHocsinh.map((hocsinh, i) => {
               if (
@@ -176,12 +175,6 @@ const HocsinhTable = ({ searchString, isSuccessUpload }) => {
                   </tr>
                 );
             })}
-          {!allHocsinh ||
-            (allHocsinh.length == 0 && (
-              <Message type='info'>
-                Không có học sinh nào trong database
-              </Message>
-            ))}
         </tbody>
       </table>
     </div>

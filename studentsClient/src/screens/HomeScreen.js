@@ -32,10 +32,8 @@ const HomeScreen = () => {
     }
 
     setTimeout(() => {
-      setErrorUpload(null);
-      setIsSuccessUpload(false);
-      setIsUploading(false);
-    }, 3000);
+      window.location.reload();
+    }, 1000);
   };
 
   return (
